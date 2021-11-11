@@ -1,0 +1,82 @@
+# SYSTEM ALIAS
+alias search='apt search'
+alias install='sudo apt-fast install'
+alias update='sudo apt-fast update -y'
+alias remove-'sudo apt-fast remove -y'
+alias purge='sudo apt-fast purge -y'
+alias zshrl='source ~/.zshrc'
+alias zshrc='vim ~/.zshrc'
+alias aliasrc='vim ~/.aliases'
+alias vimrc='vim ~/.vimrc'
+alias rmf='rm -rf'
+alias ex='exit'
+alias cl='clear'
+
+# DOCKER ALIAS
+alias dc='docker'
+alias dci='docker images'
+alias dcpa='docker ps -a'
+alias dcps='docker ps'
+alias dcrm='docker rm'
+alias dcrmi='docker rmi'
+alias dco='docker-compose'
+
+alias dcrmni='docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
+alias trans='dc run -it --rm soimort/translate-shell -shell'
+
+# GIT ALIAS
+alias ga='git add .'
+alias gcm='git commit -m'
+alias gi='git init -y'
+alias gs='git status'
+alias gpul='git pull origin'
+alias gpus='git push origin $(git_current_branch)'
+alias gcl='git clone'
+alias gst='git stash'
+
+# YARN, NPM
+alias ya='yarn add'
+alias yr='yarm remove'
+alias ys='yarn start'
+alias yd='yarn dev'
+alias yaG='yarn global add'
+alias yaD='yarn add -D'
+
+alias ngl='npm list -g --depth=0'
+alias ygl='yarn global list'
+
+# OPEN FILE
+alias -s md=code
+alias -s js=code
+alias -s ejs=code
+alias -s ts=code
+alias -s yaml=code
+
+# GLOBAL
+alias -g G="| grep"
+alias -g L="| less"
+
+# OTHER
+alias nodejs='cd /var/www/html/nodejs'
+alias h='history'
+alias px='ps auxf | grep'
+
+alias nosql='/home/vhm/Downloads/tools/nosqlbooster4mongo-7.0.2.AppImage'
+
+# FUNC
+dcleanup(){
+    docker rm -v $(docker ps --filter status=exited -q 2>/dev/null) 2>/dev/null
+    docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2>/dev/null
+}
+
+#gf(){
+#    curr_branch=$(git symbolic-ref --short -q HEAD);
+#    git add *
+#    git commit -m $1;
+#    git push origin $curr_branch;
+#}
+
+mkcd(){
+    mkdir "$1"
+    cd "$1"
+}
