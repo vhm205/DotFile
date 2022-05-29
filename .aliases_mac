@@ -1,0 +1,103 @@
+# SYSTEM ALIAS
+alias svcl='brew services list'
+alias svs='brew services start'
+alias svsto='brew services stop'
+alias svr='brew services restart'
+alias rmenv='git filter-branch --index-filter "git rm -rf --cached --ignore-unmatch .env" HEAD && git push --force'
+
+alias zshrl='source ~/.zshrc'
+alias zshrc='vim ~/.zshrc'
+alias aliasrc='vim ~/.aliases'
+alias vimrc='vim ~/.vimrc'
+alias rmf='rm -rf'
+alias ex='exit'
+alias cl='clear'
+
+# DOCKER ALIAS
+alias dc='docker'
+alias dci='docker images'
+alias dcpa='docker ps -a'
+alias dcps='docker ps'
+alias dcrm='docker rm'
+alias dcrmi='docker rmi'
+alias dco='docker-compose'
+alias dcnw='docker network'
+alias dcvl='docker volume'
+
+alias dcrmni='docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
+alias trans='dc run -it --rm soimort/translate-shell -shell'
+
+# GIT ALIAS
+alias ga='git add .'
+alias gcm='git commit -m'
+alias gcma='git commit -am'
+alias gi='git init -y'
+alias gs='git status'
+alias gpul='git pull origin'
+alias gpus='git push origin $(git_current_branch)'
+alias gcl='git clone'
+alias gst='git stash'
+alias gsts='git stash save -m'
+alias gstpu='git stash push -m'
+alias gstp='git stash pop'
+alias gstl='git stash list'
+alias gcrp='git cherry-pick -x'
+alias glnm='git log --no-merges'
+alias glogol='git log --oneline'
+alias grbh='git rebase -i HEAD~'
+alias glfl='git log --follow -- ' # Show commits where a particular file was changed
+
+# YARN, NPM
+alias ya='yarn add'
+alias yr='yarn remove'
+alias ys='yarn start'
+alias yd='yarn dev'
+alias yaG='yarn global add'
+alias yaD='yarn add -D'
+alias yi='yarn -y'
+
+alias ngl='npm list -g --depth=0'
+alias ygl='yarn global list'
+
+# OPEN FILE
+alias -s md=code
+alias -s js=code
+alias -s ejs=code
+alias -s ts=code
+alias -s yaml=code
+
+# GLOBAL
+alias -g G="| grep"
+alias -g L="| less"
+
+# OTHER
+alias nodejs='cd /var/www/html/nodejs'
+alias h='history'
+alias px='ps auxf | grep'
+alias dumpprod='mongodump --host 3.0.91.113 -d cbs_official --port 27017 --username admin_cbs --password dAGT5ttW6CLrsTuw'
+alias dumpstag='mongodump --host 3.1.51.72 -d cbs_staging --port 27017 --username admin_cbs --password dAGT5ttW6CLrsTuw -o cbs_staging'
+
+mkcd(){
+    mkdir "$1"
+    cd "$1"
+}
+
+mkf() {
+for var in "$@"
+do
+    mkdir -p $( dirname "$var") && touch "$var" 
+done 
+}
+
+dcleanup(){
+    docker rm -v $(docker ps --filter status=exited -q 2>/dev/null) 2>/dev/null
+    docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2>/dev/null
+}
+
+gacp(){
+    curr_branch=$(git symbolic-ref --short -q HEAD)
+    git add *
+    git commit -m $1
+    git push origin $curr_branch
+}
+
