@@ -1,9 +1,9 @@
-# TESTING
 # SYSTEM ALIAS
 alias svcl='brew services list'
 alias svs='brew services start'
 alias svsto='brew services stop'
 alias svr='brew services restart'
+alias svse='brew search'
 
 alias zshrl='source ~/.zshrc'
 alias zshrc='vim ~/.zshrc'
