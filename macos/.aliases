@@ -1,13 +1,13 @@
+# TESTING
 # SYSTEM ALIAS
 alias svcl='brew services list'
 alias svs='brew services start'
 alias svsto='brew services stop'
 alias svr='brew services restart'
-alias rmenv='git filter-branch --index-filter "git rm -rf --cached --ignore-unmatch .env" HEAD && git push --force'
 
 alias zshrl='source ~/.zshrc'
 alias zshrc='vim ~/.zshrc'
-alias aliasrc='vim ~/.aliases'
+alias aliasrc='vim ~/aliasrc/.aliases'
 alias vimrc='vim ~/.vimrc'
 alias rmf='rm -rf'
 alias ex='exit'
@@ -23,8 +23,8 @@ alias dcrmi='docker rmi'
 alias dco='docker-compose'
 alias dcnw='docker network'
 alias dcvl='docker volume'
-
-alias dcrmni='docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
+alias dcsha='docker inspect --format "{{ .Image }}"'
+alias dcrmni='dc rmi $(docker images --filter "dangling=true" -q --no-trunc)'
 alias trans='dc run -it --rm soimort/translate-shell -shell'
 
 # GIT ALIAS
@@ -46,6 +46,7 @@ alias glnm='git log --no-merges'
 alias glogol='git log --oneline'
 alias grbh='git rebase -i HEAD~'
 alias glfl='git log --follow -- ' # Show commits where a particular file was changed
+alias rmenv='git filter-branch --force --index-filter "git rm -rf --cached --ignore-unmatch .env" HEAD && git push --force'
 
 # YARN, NPM
 alias ya='yarn add'
@@ -94,10 +95,15 @@ dcleanup(){
     docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2>/dev/null
 }
 
-gacp(){
-    curr_branch=$(git symbolic-ref --short -q HEAD)
-    git add *
-    git commit -m $1
-    git push origin $curr_branch
+dcsar() {
+  docker stop $1
+  docker rm $1
 }
 
+gacp(){
+    curr_branch=$(git symbolic-ref --short -q HEAD)
+    git add .
+    git commit -m $1
+    git pull origin $curr_branch
+    git push origin $curr_branch
+}
