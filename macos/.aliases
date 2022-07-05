@@ -5,6 +5,7 @@ alias svsto='brew services stop'
 alias svr='brew services restart'
 alias svse='brew search'
 alias svi='brew install'
+alias svic='brew install --cask'
 alias svu='brew unistall'
 
 alias zshrl='source ~/.zshrc'
