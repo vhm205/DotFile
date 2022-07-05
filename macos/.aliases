@@ -94,7 +94,7 @@ do
 done 
 }
 
-dcleanup(){
+dcleanup() {
     docker rm -v $(docker ps --filter status=exited -q 2>/dev/null) 2>/dev/null
     docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2>/dev/null
 }
@@ -104,10 +104,14 @@ dcsar() {
   docker rm $1
 }
 
-gacp(){
+gacp() {
     curr_branch=$(git symbolic-ref --short -q HEAD)
     git add .
     git commit -m $1
     git pull origin $curr_branch
     git push origin $curr_branch
+}
+
+fwatch() {
+  fswatch -o $1 | xargs -n1 -I{} . $2
 }
