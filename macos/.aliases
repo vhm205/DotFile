@@ -1,5 +1,4 @@
 # SYSTEM ALIAS
-# TEST
 alias svcl='brew services list'
 alias svs='brew services start'
 alias svsto='brew services stop'
