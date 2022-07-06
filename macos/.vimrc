@@ -1,4 +1,3 @@
-set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
@@ -15,6 +14,9 @@ Plugin 'mhartington/oceanic-next'
 
 " Auto complete
 Plugin 'neoclide/coc.nvim', {'branch': 'release'}
+
+" Find file (coc extension)
+Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
 " Support write git command in vim
 Plugin 'tpope/vim-fugitive'
@@ -42,7 +44,6 @@ Plugin 'leafgarland/typescript-vim'
 Plugin 'peitalin/vim-jsx-typescript'
 
 " For JS, JSX
-" Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'maxmellon/vim-jsx-pretty'
 
@@ -85,15 +86,19 @@ endif
   
 colorscheme OceanicNext
 
+""" Config
+
 set encoding=UTF-8
 set number
 set laststatus=2
 set noshowmode
 set showcmd
+
 set tabstop=8
 set softtabstop=2
 set shiftwidth=2
 set expandtab
+
 set smartindent
 set autoread
 set smartcase
@@ -112,6 +117,8 @@ set undodir=~/.vim/undodir
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+
+""" Variables
 
 " Map leader to <space>
 " let mapleader = " "
@@ -147,6 +154,8 @@ let g:multi_cursor_select_all_word_key = '<C-a>'
 let g:coc_global_extensions = [
   \ 'coc-tsserver'
   \ ]
+
+""" Mappings
 
 " Map switch between windows
 "nore <silent> <C-K> :wincmd k<CR>
@@ -196,6 +205,33 @@ nmap <silent> gr <Plug>(coc-references)
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-@> coc#refresh()
+
+nmap <silent> <leader>m :History<CR>
+
+" fzf
+nmap <Leader>t [fzf-p]
+xmap <Leader>t [fzf-p]
+
+nnoremap <silent> [fzf-p]p     :<C-u>CocCommand fzf-preview.FromResources project_mru git<CR>
+nnoremap <silent> [fzf-p]gs    :<C-u>CocCommand fzf-preview.GitStatus<CR>
+nnoremap <silent> [fzf-p]ga    :<C-u>CocCommand fzf-preview.GitActions<CR>
+nnoremap <silent> [fzf-p]b     :<C-u>CocCommand fzf-preview.Buffers<CR>
+nnoremap <silent> [fzf-p]B     :<C-u>CocCommand fzf-preview.AllBuffers<CR>
+nnoremap <silent> [fzf-p]o     :<C-u>CocCommand fzf-preview.FromResources buffer project_mru<CR>
+nnoremap <silent> [fzf-p]<C-o> :<C-u>CocCommand fzf-preview.Jumps<CR>
+nnoremap <silent> [fzf-p]g;    :<C-u>CocCommand fzf-preview.Changes<CR>
+nnoremap <silent> [fzf-p]/     :<C-u>CocCommand fzf-preview.Lines --add-fzf-arg=--no-sort --add-fzf-arg=--query="'"<CR>
+nnoremap <silent> [fzf-p]*     :<C-u>CocCommand fzf-preview.Lines --add-fzf-arg=--no-sort --add-fzf-arg=--query="'<C-r>=expand('<cword>')<CR>"<CR>
+nnoremap          [fzf-p]gr    :<C-u>CocCommand fzf-preview.ProjectGrep<Space>
+xnoremap          [fzf-p]gr    "sy:CocCommand   fzf-preview.ProjectGrep<Space>-F<Space>"<C-r>=substitute(substitute(@s, '\n', '', 'g'), '/', '\\/', 'g')<CR>"
+nnoremap <silent> [fzf-p]t     :<C-u>CocCommand fzf-preview.BufferTags<CR>
+nnoremap <silent> [fzf-p]q     :<C-u>CocCommand fzf-preview.QuickFix<CR>
+nnoremap <silent> [fzf-p]l     :<C-u>CocCommand fzf-preview.LocationList<CR>
+
+""" Auto CMD 
+
 augroup mygroup
   autocmd!
   " Setup formatexpr specified filetype(s).
@@ -204,8 +240,6 @@ augroup mygroup
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-@> coc#refresh()
 """ END COC.NVIM
 
 " Start NERDTree, unless a file or session is specified, eg. vim -S session_file.vim.
@@ -237,6 +271,7 @@ endif
 " autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
 " autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
 
+
 " Set transparent bg
 hi Normal guibg=NONE ctermbg=NONE
 hi LineNr guibg=NONE ctermbg=NONE
@@ -267,7 +302,7 @@ hi ReduxHooksKeywords ctermfg=204 guifg=#C176A7
 hi WebBrowser ctermfg=204 guifg=#56B6C2
 hi ReactLifeCycleMethods ctermfg=204 guifg=#D19A66
 
-" Custom Mapping
+""" Custom Mapping
 nmap <leader>tt :below vertical terminal<CR>
 
 " resize current buffer by +/- 5
