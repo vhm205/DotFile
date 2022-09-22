@@ -1,5 +1,5 @@
 # Fig pre block. Keep at the top of this file.
-[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && . "$HOME/.fig/shell/zshrc.pre.zsh"
+[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -117,6 +117,12 @@ if [ -f ~/aliasrc/.aliases ]; then
   source ~/aliasrc/.aliases
 fi
 
+# FZF, ripgrep for searching
+if type rg &> /dev/null; then
+  export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!{node_modules/*,.git/*}"'
+  export FZF_DEFAULT_OPTS='-m --height 50% --border'
+fi
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 export PATH=/usr/local/Cellar/mongodb-community@4.4/4.4.10/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin’
@@ -127,5 +133,23 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# bun completions
+[ -s "/Users/macintoshhd/.bun/_bun" ] && source "/Users/macintoshhd/.bun/_bun"
+
+# bun
+export BUN_INSTALL="/Users/macintoshhd/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/macintoshhd/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/macintoshhd/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/macintoshhd/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/macintoshhd/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
 # Fig post block. Keep at the bottom of this file.
-[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && . "$HOME/.fig/shell/zshrc.post.zsh"
+[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"

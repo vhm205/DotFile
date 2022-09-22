@@ -1,0 +1,10 @@
+{
+  "colors.filetypes": ["*"],
+  "coc.preferences.formatOnSaveFiletypes": ["css", "markdown"],
+  "prettier.singleQuote": true,
+  "prettier.useTabs": true,
+  "eslint.autoFixOnSave": true,
+  "eslint.alwaysShowStatus": true,
+  "eslint.packageManager": "yarn",
+  "eslint.run": "onSave"
+}

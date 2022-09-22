@@ -16,10 +16,14 @@ Plugin 'mhartington/oceanic-next'
 Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Find file (coc extension)
+Plugin 'junegunn/fzf.vim'
 Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
 " Support write git command in vim
 Plugin 'tpope/vim-fugitive'
+
+" Support GraphQL
+Plugin 'jparise/vim-graphql'
 
 " Badge Status Mode In Vim
 Plugin 'itchyny/lightline.vim'
@@ -49,7 +53,6 @@ Plugin 'maxmellon/vim-jsx-pretty'
 
 " Comment code
 Plugin 'tpope/vim-commentary'
-" Plugin 'suy/vim-context-commentstring'
 
 " Auto close tag (HTML)
 Plugin 'alvan/vim-closetag'
@@ -59,6 +62,12 @@ Plugin 'terryma/vim-expand-region'
 
 " Auto close character (Ex: " ' [ {)
 Plugin 'jiangmiao/auto-pairs'
+
+" Live server HTML
+Plugin 'turbio/bracey.vim'
+
+" ESlint
+Plugin 'neoclide/coc-eslint'
 
 call vundle#end()       
 
@@ -93,6 +102,7 @@ set number
 set laststatus=2
 set noshowmode
 set showcmd
+" set autochdir
 
 set tabstop=8
 set softtabstop=2
@@ -124,9 +134,9 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 " let mapleader = " "
 
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+" let g:ctrlp_user_command = 'find %s -type f | grep -v "`cat .ctrlpignore`"'
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'dir':  '\v[\/](node_modules|dist)|(\.(git|hg|svn))$',
   \ 'file': '\v\.(exe|so|dll)$',
   \ 'link': 'some_bad_symbolic_links',
   \ }
@@ -170,15 +180,28 @@ nnoremap <C-b> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
 
 """ COC.NVIM
-nnoremap <silent> K :call CocAction('doHover')<CR>
+" nnoremap <silent> K :call CocAction('doHover')<CR>
 nnoremap <silent> <space>d :<C-u>CocList diagnostics<cr>
 
+""" Formatting
+" command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
+
+
 " Use tab for trigger completion with characters ahead and navigate.
+" NOTE: There's always complete item selected by default, you may want to enable
+" no select by `"suggest.noselect": true` in your configuration file.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ CheckBackspace() ? "\<TAB>" :
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice.
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 function! CheckBackspace() abort
   let col = col('.') - 1
@@ -230,6 +253,11 @@ nnoremap <silent> [fzf-p]t     :<C-u>CocCommand fzf-preview.BufferTags<CR>
 nnoremap <silent> [fzf-p]q     :<C-u>CocCommand fzf-preview.QuickFix<CR>
 nnoremap <silent> [fzf-p]l     :<C-u>CocCommand fzf-preview.LocationList<CR>
 
+nnoremap <silent> <Leader>h :Rg<CR>
+
+" Every time we invoke Rg, FZF + ripgrep will not consider filename as a match in Vim
+" command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
+
 """ Auto CMD 
 
 augroup mygroup
@@ -253,10 +281,6 @@ autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTa
 autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
 
 autocmd FileType apache setlocal commentstring=#\ %s
-
-" autocmd FileType jsx setlocal commentstring={/*\ %s\ */}
-" autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.jsx
-" autocmd FileType javascript.jsx setlocal commentstring={/*\ %s\ */}
 
 if exists('g:context#commentstring#comments_table')
   let g:context#commentstring#table['javascript.jsx'] = {
