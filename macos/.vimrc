@@ -10,7 +10,11 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " Color Scheme
-Plugin 'mhartington/oceanic-next'
+" Plugin 'mhartington/oceanic-next'
+" Plugin 'rakr/vim-one'
+" Plugin 'drewtempelmeyer/palenight.vim'
+
+Plugin 'sainnhe/everforest'
 
 " Auto complete
 Plugin 'neoclide/coc.nvim', {'branch': 'release'}
@@ -22,11 +26,17 @@ Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
 " Support write git command in vim
 Plugin 'tpope/vim-fugitive'
 
+" Show git content change
+Plugin 'airblade/vim-gitgutter'
+
 " Support GraphQL
 Plugin 'jparise/vim-graphql'
 
 " Badge Status Mode In Vim
 Plugin 'itchyny/lightline.vim'
+
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 
 " Tree explorer
 Plugin 'preservim/nerdtree'
@@ -64,12 +74,28 @@ Plugin 'terryma/vim-expand-region'
 Plugin 'jiangmiao/auto-pairs'
 
 " Live server HTML
-Plugin 'turbio/bracey.vim'
+" Plugin 'turbio/bracey.vim'
 
 " ESlint
 Plugin 'neoclide/coc-eslint'
 
-call vundle#end()       
+" Motion Speed <3
+Plugin 'easymotion/vim-easymotion'
+
+" REST api
+Plugin 'diepm/vim-rest-console'
+
+Plugin 'wakatime/vim-wakatime'
+
+" Wrap content in [], {}, "", ''
+Plugin 'tpope/vim-surround'
+
+Plugin 'morhetz/gruvbox'
+
+" AI suggest complete
+Plugin 'Exafunction/codeium.vim'
+
+call vundle#end()
 
 filetype plugin indent on
 syntax on
@@ -89,38 +115,55 @@ syntax on
 " set background=dark
 " colorscheme iceberg
 
-if (has("termguicolors"))
+if has('termguicolors')
   set termguicolors
 endif
-  
-colorscheme OceanicNext
 
-""" Config
+set background=dark
+
+" let g:gruvbox_bold = 0
+
+let g:everforest_better_performance = 1
+let g:everforest_transparent_background = 1
+let g:everforest_disable_italic_comment = 1
+" let g:everforest_diagnostic_text_highlight = 1
+" let g:everforest_diagnostic_line_highlight = 1
+let g:everforest_background = 'hard'
+let g:airline_theme = 'everforest'
+let g:everforest_ui_contrast = 'high'
+
+let g:everforest_colors_override = {'bg0': ['#202020', '234'], 'bg2': ['#282828', '235']}
+
+colorscheme everforest
+" colorscheme palenight
+" colorscheme one
+" colorscheme OceanicNext
+" colorscheme gruvbox
+
 
 set encoding=UTF-8
-set number
-set laststatus=2
-set noshowmode
-set showcmd
-" set autochdir
 
-set tabstop=8
+set number           " Line number are good
+set relativenumber   " Relative number to quickly run command
+
+set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 set expandtab
 
-set smartindent
-set autoread
 set smartcase
 set nowrap
 set scrolloff=4
-" set backspace=indent,eol,start
 set mouse=a
 set ruler
 set hlsearch
 set noswapfile
-set relativenumber
 set cursorline
+
+set pastetoggle=<F2>
+
+" Share clipboard between OS vs VIM
+set clipboard^=unnamed,unnamedplus
 
 " Plugin
 set undodir=~/.vim/undodir
@@ -131,10 +174,25 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 """ Variables
 
 " Map leader to <space>
-" let mapleader = " "
+let mapleader = " "
+
+" Use a line cursor within insert mode and a block cursor everywhere else.
+"
+" Reference chart of values:
+"   Ps = 0  -> blinking block.
+"   Ps = 1  -> blinking block (default).
+"   Ps = 2  -> steady block.
+"   Ps = 3  -> blinking underline.
+"   Ps = 4  -> steady underline.
+"   Ps = 5  -> blinking bar (xterm).
+"   Ps = 6  -> steady bar (xterm).
+let &t_SI = "\e[4 q"
+let &t_EI = "\e[2 q"
+
+let g:airline_section_y = '{…}%3{codeium#GetStatusString()}'
 
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-" let g:ctrlp_user_command = 'find %s -type f | grep -v "`cat .ctrlpignore`"'
+" let g:ctrlp_user_command = 'find %s -type f | grep -v "cat .ctrlpignore"'
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/](node_modules|dist)|(\.(git|hg|svn))$',
   \ 'file': '\v\.(exe|so|dll)$',
@@ -152,6 +210,12 @@ let g:lightline = {
       \ },
       \ }
 
+" Airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = '🦴'
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+
 " Nerdtree git status
 let g:NERDTreeGitStatusUseNerdFonts = 1
 let NERDTreeShowHidden=1
@@ -160,12 +224,28 @@ let NERDTreeShowHidden=1
 let g:multi_cursor_next_key = '<C-n>'
 let g:multi_cursor_select_all_word_key = '<C-a>'
 
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+" Turn on case-insensitive feature
+let g:EasyMotion_smartcase = 1
+
 " Coc nvim
 let g:coc_global_extensions = [
   \ 'coc-tsserver'
   \ ]
 
 """ Mappings
+
+" Jump to anywhere you want with minimal keystrokes, with just one key binding.
+" `s{char}{label}`
+nmap s <Plug>(easymotion-overwin-f)
+" or
+" `s{char}{char}{label}`
+" Need one more keystroke, but on average, it may be more comfortable.
+nmap s <Plug>(easymotion-overwin-f2)
+
+" JK motions: Line motions
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
 
 " Map switch between windows
 "nore <silent> <C-K> :wincmd k<CR>
@@ -183,9 +263,13 @@ nnoremap <C-f> :NERDTreeFind<CR>
 " nnoremap <silent> K :call CocAction('doHover')<CR>
 nnoremap <silent> <space>d :<C-u>CocList diagnostics<cr>
 
+" Swap last 2 files
+nnoremap <tab> :bp<CR> " Previous buffer file
+nnoremap <S-tab> :bn<CR> " Next buffer file
+nnoremap <Leader><Leader>c <c-^> " The last two files
+
 """ Formatting
 " command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
-
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: There's always complete item selected by default, you may want to enable
@@ -224,6 +308,12 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
+" Move a line of text using Leader+[jk]
+nmap <Leader>j mz:m+<cr>`z
+nmap <Leader>k mz:m-2<cr>`z
+vmap <Leader>j :m'>+<cr>`<my`>mzgv`yo`z
+vmap <Leader>k :m'<-2<cr>`>my`<mzgv`yo`z
+
 " Formatting selected code.
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
@@ -253,12 +343,13 @@ nnoremap <silent> [fzf-p]t     :<C-u>CocCommand fzf-preview.BufferTags<CR>
 nnoremap <silent> [fzf-p]q     :<C-u>CocCommand fzf-preview.QuickFix<CR>
 nnoremap <silent> [fzf-p]l     :<C-u>CocCommand fzf-preview.LocationList<CR>
 
-nnoremap <silent> <Leader>h :Rg<CR>
+nnoremap <silent> <Leader><Leader>h :Rg<CR>
+nnoremap <silent> <Leader><Leader>f :Files<CR>
 
 " Every time we invoke Rg, FZF + ripgrep will not consider filename as a match in Vim
-" command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
+command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
 
-""" Auto CMD 
+""" Auto CMD
 
 augroup mygroup
   autocmd!
@@ -277,10 +368,21 @@ autocmd VimEnter * if argc() == 0 && !exists('s:std_in') && v:this_session == ''
 " Close the tab if NERDTree is the only window remaining in it.
 autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 
+"\\ Delete all trailing space when saving file
+autocmd BufWritePre * :%s/\s\+$//e
+
 " set filetypes as typescriptreact
 autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
 
 autocmd FileType apache setlocal commentstring=#\ %s
+
+" Save session on quitting Vim
+" autocmd VimLeave * NERDTreeClose
+" autocmd VimLeave * mksession! session.vim
+
+" Restore session on starting Vim
+" autocmd VimEnter * call MySessionRestoreFunction()
+" autocmd VimEnter * NERDTree
 
 if exists('g:context#commentstring#comments_table')
   let g:context#commentstring#table['javascript.jsx'] = {
@@ -328,6 +430,7 @@ hi ReactLifeCycleMethods ctermfg=204 guifg=#D19A66
 
 """ Custom Mapping
 nmap <leader>tt :below vertical terminal<CR>
+nmap <leader>yy :below horizontal terminal<CR>
 
 " resize current buffer by +/- 5
 nnoremap <S-Left> :vertical resize +5<cr>

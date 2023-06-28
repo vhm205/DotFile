@@ -2,6 +2,7 @@
   "colors.filetypes": ["*"],
   "coc.preferences.formatOnSaveFiletypes": ["css", "markdown"],
   "prettier.singleQuote": true,
+  "prettier.tabWidth": 2,
   "prettier.useTabs": true,
   "eslint.autoFixOnSave": true,
   "eslint.alwaysShowStatus": true,

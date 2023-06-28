@@ -18,7 +18,7 @@ export ZSH="/Users/macintoshhd/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 
-# ZSH_THEME="robbyrussell"
+# ZSH_THEME="agnoster"
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
@@ -112,6 +112,9 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 source /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme
+# alias ls='exa --icons --group-directories-first'
+# alias ll='exa -l --icons --no-user --group-directories-first  --time-style long-iso'
+# alias la='exa -la --icons --no-user --group-directories-first  --time-style long-iso'
 
 if [ -f ~/aliasrc/.aliases ]; then
   source ~/aliasrc/.aliases
@@ -131,6 +134,12 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
+# Flutter
+export PATH="$PATH:/Users/macintoshhd/development/flutter/bin"
+
+# Flux
+command -v flux >/dev/null && . <(flux completion zsh)
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # bun completions
@@ -140,16 +149,22 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export BUN_INSTALL="/Users/macintoshhd/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
+# Postgres
+# echo 'export PATH="/usr/local/opt/libpq/bin:$PATH"' >> ~/.zshrc
+
+# OPEN AI
+export OPENAI_KEY=
+
 # NVM
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/macintoshhd/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/macintoshhd/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '/Users/macintoshhd/development/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/macintoshhd/development/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/macintoshhd/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/macintoshhd/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '/Users/macintoshhd/development/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/macintoshhd/development/google-cloud-sdk/completion.zsh.inc'; fi
 
 # Fig post block. Keep at the bottom of this file.
 [[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"

@@ -1,7 +1,7 @@
 # SYSTEM ALIAS
-alias svcl='brew services list'
+alias svl='brew services list'
 alias svs='brew services start'
-alias svsto='brew services stop'
+alias svst='brew services stop'
 alias svr='brew services restart'
 alias svse='brew search'
 alias svi='brew install'
@@ -15,6 +15,12 @@ alias vimrc='vim ~/.vimrc'
 alias rmf='rm -rf'
 alias ex='exit'
 alias cl='clear'
+alias checkp='lsof -i'
+
+# PYTHON
+alias pym='python3'
+alias pim='pip3'
+alias pya='python3 -m pip install'
 
 # DOCKER ALIAS
 alias dc='docker'
@@ -27,41 +33,67 @@ alias dco='docker-compose'
 alias dcnw='docker network'
 alias dcvl='docker volume'
 alias dcsha='docker inspect --format "{{ .Image }}"'
-alias dcrmni='dc rmi $(docker images --filter "dangling=true" -q --no-trunc)'
-alias trans='dc run -it --rm soimort/translate-shell -shell'
+alias dcrmni='docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
+alias trans='docker run -it --rm soimort/translate-shell -shell'
+alias itt='docker run --rm -d -p 8080:80 --name it-tools -it corentinth/it-tools'
+alias ku='kubectl'
+alias mku='minikube'
+
+alias aia='aws-iam-authenticator'
+alias btc='better-commits'
 
 # GIT ALIAS
-alias ga='git add .'
+alias ga='git add -u'
 alias gcm='git commit -m'
-alias gcma='git commit -am'
+alias gcmne='git commit --amend --no-edit'
 alias gi='git init -y'
 alias gs='git status'
 alias gpul='git pull origin'
 alias gpus='git push origin $(git_current_branch)'
+alias gdi='git diff'
 alias gcl='git clone'
 alias gst='git stash'
 alias gsts='git stash save -m'
 alias gstpu='git stash push -m'
-alias gstp='git stash pop'
+alias gstpo='git stash pop'
 alias gstl='git stash list'
-alias gcrp='git cherry-pick -x'
+alias gcpx='git cherry-pick -x'
 alias glnm='git log --no-merges'
-alias glogol='git log --oneline'
+alias glone='git log --oneline'
 alias grbh='git rebase -i HEAD~'
-alias glfl='git log --follow -- ' # Show commits where a particular file was changed
+alias grco='git rebase --continue'
+alias grab='git rebase --abort'
 alias rmenv='git filter-branch --force --index-filter "git rm -rf --cached --ignore-unmatch .env" HEAD && git push --force'
 
+# Tricks
+# https://topdev.vn/blog/10-van-de-ve-git-thuong-gap-va-giai-phap/
+
 # YARN, NPM
+alias yi='yarn install'
 alias ya='yarn add'
 alias yr='yarn remove'
 alias ys='yarn start'
 alias yd='yarn dev'
+alias yt='yarn test'
 alias yaG='yarn global add'
+alias yrG='yarn global remove'
 alias yaD='yarn add -D'
-alias yi='yarn -y'
+alias yy='yarn -y'
+alias ysd='yarn start:dev'
+
+alias psync='npm run dbm:run'
+alias pgen='npm run dbm:generate'
+alias prevert='npm run dbm:revert'
+
+alias niG='sudo npm install -g'
+alias nuG='sudo npm uninstall -g'
 
 alias ngl='npm list -g --depth=0'
 alias ygl='yarn global list'
+
+# Tools
+alias inf='infisical'
+alias infr='infisical run --'
 
 # OPEN FILE
 alias -s md=code
@@ -75,11 +107,15 @@ alias -g G="| grep"
 alias -g L="| less"
 
 # OTHER
-alias nodejs='cd /var/www/html/nodejs'
+alias coding='cd /var/www/html/coding'
+alias codelight='cd /var/www/html/coding/CODELIGHT'
+alias trixgo='cd /var/www/html/coding/TRIXGO'
+alias personal='cd /var/www/html/coding/PERSONAL'
+alias tool='cd /var/www/html/coding/PERSONAL/vhm-tools'
+alias pubip='curl -4 icanhazip.com'
+
 alias h='history'
 alias px='ps auxf | grep'
-alias dumpprod='mongodump --host 3.0.91.113 -d cbs_official --port 27017 --username admin_cbs --password dAGT5ttW6CLrsTuw'
-alias dumpstag='mongodump --host 3.1.51.72 -d cbs_staging --port 27017 --username admin_cbs --password dAGT5ttW6CLrsTuw -o cbs_staging'
 
 mkcd(){
     mkdir "$1"
@@ -89,8 +125,8 @@ mkcd(){
 mkf() {
 for var in "$@"
 do
-    mkdir -p $( dirname "$var") && touch "$var" 
-done 
+    mkdir -p $( dirname "$var") && touch "$var"
+done
 }
 
 dcleanup() {
@@ -99,8 +135,11 @@ dcleanup() {
 }
 
 dcsar() {
-  docker stop $1
-  docker rm $1
+  docker stop $1 && docker rm $1
+}
+
+dccfull() {
+  docker stop $1 && docker rm $1 && docker rmi $1
 }
 
 gacp() {
@@ -113,4 +152,16 @@ gacp() {
 
 fwatch() {
   fswatch -o $1 | xargs -n1 -I{} . $2
+}
+
+kulog() {
+  ku exec -it pod/$1 -n trixgo-prod -- pm2 logs 0
+}
+
+gencer() {
+  openssl req -x509 -newkey rsa:4096 -keyout $1/key.pem -out $1/cert.pem -nodes -days 365
+}
+
+sitespeed() {
+  docker run --rm -v "$(pwd):/sitespeed.io" sitespeedio/sitespeed.io:26.1.0 $1
 }
