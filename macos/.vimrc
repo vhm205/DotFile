@@ -268,6 +268,11 @@ nnoremap <tab> :bp<CR> " Previous buffer file
 nnoremap <S-tab> :bn<CR> " Next buffer file
 nnoremap <Leader><Leader>c <c-^> " The last two files
 
+" Fugitive Conflict Resolution
+nnoremap <leader>gd :Gvdiffsplit!<CR>
+nnoremap gdh :diffget //2<CR>
+nnoremap gdl :diffget //3<CR>
+
 """ Formatting
 " command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
 
@@ -346,6 +351,9 @@ nnoremap <silent> [fzf-p]l     :<C-u>CocCommand fzf-preview.LocationList<CR>
 nnoremap <silent> <Leader><Leader>h :Rg<CR>
 nnoremap <silent> <Leader><Leader>f :Files<CR>
 
+" Scroll in terminal
+tnoremap <c-b> <c-\><c-n>
+
 " Every time we invoke Rg, FZF + ripgrep will not consider filename as a match in Vim
 command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
 
@@ -396,7 +404,6 @@ endif
 " Sync
 " autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
 " autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
-
 
 " Set transparent bg
 hi Normal guibg=NONE ctermbg=NONE

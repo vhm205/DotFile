@@ -109,16 +109,13 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-# alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 source /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme
 # alias ls='exa --icons --group-directories-first'
 # alias ll='exa -l --icons --no-user --group-directories-first  --time-style long-iso'
 # alias la='exa -la --icons --no-user --group-directories-first  --time-style long-iso'
 
-if [ -f ~/aliasrc/.aliases ]; then
-  source ~/aliasrc/.aliases
-fi
+[ -f ~/aliasrc/.aliases ] && source ~/aliasrc/.aliases
 
 # FZF, ripgrep for searching
 if type rg &> /dev/null; then
@@ -153,7 +150,6 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # echo 'export PATH="/usr/local/opt/libpq/bin:$PATH"' >> ~/.zshrc
 
 # OPEN AI
-export OPENAI_KEY=
 
 # NVM
 export NVM_DIR="$HOME/.nvm"
