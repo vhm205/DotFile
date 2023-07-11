@@ -19,7 +19,6 @@ export ZSH="/Users/macintoshhd/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 
 # ZSH_THEME="agnoster"
-
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
@@ -150,6 +149,9 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # echo 'export PATH="/usr/local/opt/libpq/bin:$PATH"' >> ~/.zshrc
 
 # OPEN AI
+
+# Python environment
+export PATH="$HOME/.pyenv/bin:$PATH"
 
 # NVM
 export NVM_DIR="$HOME/.nvm"

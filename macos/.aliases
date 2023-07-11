@@ -18,9 +18,9 @@ alias cl='clear'
 alias checkp='lsof -i'
 
 # PYTHON
-alias pym='python3'
-alias pim='pip3'
-alias pya='python3 -m pip install'
+alias python='python3.11'
+alias penv='pipenv'
+alias pyrun='pipenv run python'
 
 # DOCKER ALIAS
 alias dc='docker'
