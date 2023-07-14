@@ -95,6 +95,9 @@ Plugin 'morhetz/gruvbox'
 " AI suggest complete
 Plugin 'Exafunction/codeium.vim'
 
+" Check grammar
+" Plugin 'rhysd/vim-grammarous'
+
 call vundle#end()
 
 filetype plugin indent on
@@ -126,8 +129,6 @@ set background=dark
 let g:everforest_better_performance = 1
 let g:everforest_transparent_background = 1
 let g:everforest_disable_italic_comment = 1
-" let g:everforest_diagnostic_text_highlight = 1
-" let g:everforest_diagnostic_line_highlight = 1
 let g:everforest_background = 'hard'
 let g:airline_theme = 'everforest'
 let g:everforest_ui_contrast = 'high'
@@ -139,7 +140,6 @@ colorscheme everforest
 " colorscheme one
 " colorscheme OceanicNext
 " colorscheme gruvbox
-
 
 set encoding=UTF-8
 
