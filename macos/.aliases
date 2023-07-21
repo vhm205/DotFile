@@ -21,6 +21,7 @@ alias checkp='lsof -i'
 alias python='python3.11'
 alias penv='pipenv'
 alias pyrun='pipenv run python'
+alias install-requirements='pip install -r requirements.txt'
 
 # DOCKER ALIAS
 alias dc='docker'
