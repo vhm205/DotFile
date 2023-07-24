@@ -48,7 +48,7 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 
 " Show icon file in nerdtree
-Plugin 'ryanoasis/vim-devicons'
+" Plugin 'ryanoasis/vim-devicons'
 
 " Multiple Cursor
 Plugin 'terryma/vim-multiple-cursors'
@@ -140,8 +140,12 @@ colorscheme everforest
 " colorscheme one
 " colorscheme OceanicNext
 " colorscheme gruvbox
-
+"
 set encoding=UTF-8
+set guifont=Fira\ Code:h12
+" set guifont=IntelOne_Mono:h11:cANSI
+" set macligatures
+" set guifont=Fira\ Code:h12
 
 set number           " Line number are good
 set relativenumber   " Relative number to quickly run command
