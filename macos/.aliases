@@ -19,8 +19,8 @@ alias checkp='lsof -i'
 
 # PYTHON
 alias python='python3.11'
-alias penv='pipenv'
-alias pyrun='pipenv run python'
+alias pie='pipenv'
+alias pir='pipenv run python'
 alias insr='pip install -r requirements.txt'
 
 # DOCKER ALIAS
@@ -165,4 +165,9 @@ gencer() {
 
 sitespeed() {
   docker run --rm -v "$(pwd):/sitespeed.io" sitespeedio/sitespeed.io:26.1.0 $1
+}
+
+pyvenv() {
+  python -m venv $1
+  source $1/bin/activate
 }
