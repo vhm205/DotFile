@@ -90,10 +90,13 @@ Plugin 'wakatime/vim-wakatime'
 " Wrap content in [], {}, "", ''
 Plugin 'tpope/vim-surround'
 
-Plugin 'morhetz/gruvbox'
+" Plugin 'morhetz/gruvbox'
 
 " AI suggest complete
 Plugin 'Exafunction/codeium.vim'
+
+" Debuger
+Plugin 'puremourning/vimspector'
 
 " Check grammar
 " Plugin 'rhysd/vim-grammarous'
@@ -124,8 +127,6 @@ endif
 
 set background=dark
 
-" let g:gruvbox_bold = 0
-
 let g:everforest_better_performance = 1
 let g:everforest_transparent_background = 1
 let g:everforest_disable_italic_comment = 1
@@ -139,8 +140,7 @@ colorscheme everforest
 " colorscheme palenight
 " colorscheme one
 " colorscheme OceanicNext
-" colorscheme gruvbox
-"
+
 set encoding=UTF-8
 
 set number           " Line number are good
@@ -232,6 +232,9 @@ let g:EasyMotion_smartcase = 1
 let g:coc_global_extensions = [
   \ 'coc-tsserver'
   \ ]
+
+let g:vimspector_base_dir='/Users/macintoshhd/.vim/bundle/vimspector'
+
 
 """ Mappings
 
@@ -354,6 +357,18 @@ nnoremap <silent> <Leader><Leader>f :Files<CR>
 
 " Scroll in terminal
 tnoremap <c-b> <c-\><c-n>
+
+nnoremap <Leader>dd :call vimspector#Launch()<CR>
+nnoremap <Leader>de :call vimspector#Reset()<CR>
+nnoremap <Leader>dc :call vimspector#Continue()<CR>
+
+nnoremap <Leader>dt :call vimspector#ToggleBreakpoint()<CR>
+nnoremap <Leader>dT :call vimspector#ClearBreakpoints()<CR>
+
+nmap <Leader>dk <Plug>VimspectorRestart
+nmap <Leader>dh <Plug>VimspectorStepOut
+nmap <Leader>dl <Plug>VimspectorStepInto
+nmap <Leader>dj <Plug>VimspectorStepOver
 
 " Every time we invoke Rg, FZF + ripgrep will not consider filename as a match in Vim
 command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
