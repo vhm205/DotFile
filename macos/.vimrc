@@ -233,8 +233,24 @@ let g:coc_global_extensions = [
   \ 'coc-tsserver'
   \ ]
 
+" https://github.com/puremourning/vimspector#supported-languages
 let g:vimspector_base_dir='/Users/macintoshhd/.vim/bundle/vimspector'
+let g:vimspector_enable_mappings = 'HUMAN'
+let g:vimspector_install_gadgets = ['vscode-js-debug', 'debugger-for-chrome']
 
+
+" Load the JSON configuration file and parse it as a Vim dictionary
+"  let g:vimspector_configurations = {}
+" try
+"   let vimspector_config_file = expand('~/.vim/configurations/vimspector-config/configurations/macos/javascript/default_config.json')
+"   let vimspector_config = join(readfile(vimspector_config_file), "\n")
+"   let g:vimspector_configurations = json_decode(vimspector_config)
+" catch
+"   " Handle any error if the JSON file cannot be loaded or parsed
+"   echohl WarningMsg
+"   echo "Error loading Vimspector configuration file"
+"   echohl None
+" endtry
 
 """ Mappings
 
