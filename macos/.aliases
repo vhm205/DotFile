@@ -1,9 +1,9 @@
 # SYSTEM ALIAS
 alias svl='brew services list'
-alias svs='brew services start'
-alias svst='brew services stop'
+alias svsta='brew services start'
+alias svsto='brew services stop'
 alias svr='brew services restart'
-alias svse='brew search'
+alias svs='brew search'
 alias svi='brew install'
 alias svic='brew install --cask'
 alias svu='brew unistall'
@@ -40,6 +40,7 @@ alias itt='docker run --rm -d -p 8080:80 --name it-tools -it corentinth/it-tools
 alias ku='kubectl'
 alias mku='minikube'
 
+# Tools
 alias aia='aws-iam-authenticator'
 alias btc='better-commits'
 
@@ -170,4 +171,8 @@ sitespeed() {
 pyvenv() {
   python -m venv $1
   source $1/bin/activate
+}
+
+psqlc() {
+  psql -h localhost -p $1 -d $2 -U $3 -W
 }
