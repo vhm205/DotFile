@@ -96,7 +96,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'Exafunction/codeium.vim'
 
 " Debuger
-Plugin 'puremourning/vimspector'
+" Plugin 'puremourning/vimspector'
 
 " Check grammar
 " Plugin 'rhysd/vim-grammarous'
@@ -234,9 +234,9 @@ let g:coc_global_extensions = [
   \ ]
 
 " https://github.com/puremourning/vimspector#supported-languages
-let g:vimspector_base_dir='/Users/macintoshhd/.vim/bundle/vimspector'
-let g:vimspector_enable_mappings = 'HUMAN'
-let g:vimspector_install_gadgets = ['vscode-js-debug', 'debugger-for-chrome']
+" let g:vimspector_base_dir='$HOME/.vim/bundle/vimspector'
+" let g:vimspector_enable_mappings = 'HUMAN'
+" let g:vimspector_install_gadgets = ['vscode-js-debug', 'debugger-for-chrome']
 
 
 " Load the JSON configuration file and parse it as a Vim dictionary
@@ -374,17 +374,17 @@ nnoremap <silent> <Leader><Leader>f :Files<CR>
 " Scroll in terminal
 tnoremap <c-b> <c-\><c-n>
 
-nnoremap <Leader>dd :call vimspector#Launch()<CR>
-nnoremap <Leader>de :call vimspector#Reset()<CR>
-nnoremap <Leader>dc :call vimspector#Continue()<CR>
+" nnoremap <Leader>dd :call vimspector#Launch()<CR>
+" nnoremap <Leader>de :call vimspector#Reset()<CR>
+" nnoremap <Leader>dc :call vimspector#Continue()<CR>
 
-nnoremap <Leader>dt :call vimspector#ToggleBreakpoint()<CR>
-nnoremap <Leader>dT :call vimspector#ClearBreakpoints()<CR>
+" nnoremap <Leader>dt :call vimspector#ToggleBreakpoint()<CR>
+" nnoremap <Leader>dT :call vimspector#ClearBreakpoints()<CR>
 
-nmap <Leader>dk <Plug>VimspectorRestart
-nmap <Leader>dh <Plug>VimspectorStepOut
-nmap <Leader>dl <Plug>VimspectorStepInto
-nmap <Leader>dj <Plug>VimspectorStepOver
+" nmap <Leader>dk <Plug>VimspectorRestart
+" nmap <Leader>dh <Plug>VimspectorStepOut
+" nmap <Leader>dl <Plug>VimspectorStepInto
+" nmap <Leader>dj <Plug>VimspectorStepOver
 
 " Every time we invoke Rg, FZF + ripgrep will not consider filename as a match in Vim
 command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
