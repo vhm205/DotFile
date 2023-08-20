@@ -118,6 +118,7 @@ alias pubip='curl -4 icanhazip.com'
 
 alias h='history'
 alias px='ps auxf | grep'
+alias mongocf='vim /usr/local/etc/mongod.conf'
 
 mkcd(){
     mkdir "$1"
