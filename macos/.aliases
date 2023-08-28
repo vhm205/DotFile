@@ -119,6 +119,7 @@ alias pubip='curl -4 icanhazip.com'
 
 alias h='history'
 alias px='ps auxf | grep'
+alias mrs='run-rs --portStart 27000 -v 5.0 --mongod /usr/local/Cellar/mongodb-community@4.4/4.4.10/bin/mongod'
 alias mongocf='vim /usr/local/etc/mongod.conf'
 
 mkcd(){
