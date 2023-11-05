@@ -71,7 +71,7 @@ alias rmenv='git filter-branch --force --index-filter "git rm -rf --cached --ign
 # Tricks
 # https://topdev.vn/blog/10-van-de-ve-git-thuong-gap-va-giai-phap/
 
-# YARN, NPM
+# YARN, NPM, PNPM
 alias yi='yarn install'
 alias ya='yarn add'
 alias yr='yarn remove'
@@ -93,6 +93,15 @@ alias nuG='sudo npm uninstall -g'
 
 alias ngl='npm list -g --depth=0'
 alias ygl='yarn global list'
+
+alias pnr='pnpm run'
+alias pni='pnpm install'
+alias pnu='pnpm uninstall'
+alias pns='pnpm start'
+alias pnd='pnpm dev'
+alias pnt='pnpm test'
+alias pnaG='pnpm add -g'
+alias pnrG='pnpm remove -g'
 
 # Tools
 alias inf='infisical'
