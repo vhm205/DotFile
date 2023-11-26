@@ -87,6 +87,18 @@ alias yaD='yarn add -D'
 alias yy='yarn -y'
 alias ysd='yarn start:dev'
 
+alias pn="pnpm"
+alias pnr="pnpm run"
+alias pna="pnpm add"
+alias pnu="pnpm remove"
+alias pne="pnpm exec"
+alias pns="pnpm start"
+alias pnd="pnpm dev"
+alias pnb="pnpm build"
+alias pnaD="pnpm add -D"
+alias pnaG="pnpm add -g"
+alias pnrG="pnpm remove -g"
+
 alias psync='npm run dbm:run'
 alias pgen='npm run dbm:generate'
 alias prevert='npm run dbm:revert'
