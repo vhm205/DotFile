@@ -7,7 +7,7 @@ alias svr='brew services restart'
 alias svs='brew search'
 alias svi='brew install'
 alias svic='brew install --cask'
-alias svu='brew unistall'
+alias svu='brew uninstall'
 alias ping='/sbin/ping'
 alias nsl='nslookup'
 
