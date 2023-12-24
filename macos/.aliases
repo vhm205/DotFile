@@ -134,11 +134,9 @@ alias -g G="| grep"
 alias -g L="| less"
 
 # OTHER
-alias coding='cd /var/www/html/coding'
-alias codelight='cd /var/www/html/coding/CODELIGHT'
-alias trixgo='cd /var/www/html/coding/TRIXGO'
-alias personal='cd /var/www/html/coding/PERSONAL'
-alias tool='cd /var/www/html/coding/PERSONAL/vhm-tools'
+alias dev='cd /var/www/html/coding'
+alias trx='cd /var/www/html/coding/TRIXGO'
+alias per='cd /var/www/html/coding/PERSONAL'
 alias pubip='curl -4 icanhazip.com'
 
 alias h='history'
