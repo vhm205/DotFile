@@ -1,49 +1,108 @@
+# CURRENT SYSTEM
+alias start-redis='sudo docker run -d -e "IP=0.0.0.0" --name redis-cluster -p 7000-7005:7000-7005 grokzen/redis-cluster:6.0.1'
+
 # SYSTEM ALIAS
-alias search='apt search'
-alias install='sudo apt-fast install'
-alias update='sudo apt-fast update -y'
-alias remove-'sudo apt-fast remove -y'
-alias purge='sudo apt-fast purge -y'
 alias zshrl='source ~/.zshrc'
 alias zshrc='vim ~/.zshrc'
-alias aliasrc='vim ~/.aliases'
+alias aliasrc='vim ~/aliasrc/.aliases'
 alias vimrc='vim ~/.vimrc'
 alias rmf='rm -rf'
 alias ex='exit'
 alias cl='clear'
+alias checkp='lsof -i'
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'
+
+# PYTHON
+alias python='python3.11'
+alias pie='pipenv'
+alias pir='pipenv run python'
+alias insr='pip install -r requirements.txt'
 
 # DOCKER ALIAS
-alias dc='docker'
-alias dci='docker images'
-alias dcpa='docker ps -a'
-alias dcps='docker ps'
-alias dcrm='docker rm'
-alias dcrmi='docker rmi'
-alias dco='docker-compose'
+alias dc='sudo docker'
+alias dci='sudo docker images'
+alias dcpa='sudo docker ps -a'
+alias dcps='sudo docker ps'
+alias dcrm='sudo docker rm'
+alias dcrmi='sudo docker rmi'
+alias dcex='sudo docker exec -it'
+alias dco='sudo docker compose'
+alias dcnw='sudo docker network'
+alias dcvl='sudo docker volume'
+alias dcsha='sudo docker inspect --format "{{ .Image }}"'
+alias dcrmni='sudo docker rmi $(sudo docker images --filter "dangling=true" -q --no-trunc)'
+alias trans='sudo docker run -it --rm soimort/translate-shell -shell'
+alias itt='sudo docker run --rm -d -p 8080:80 --name it-tools -it corentinth/it-tools'
 
-alias dcrmni='docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
-alias trans='dc run -it --rm soimort/translate-shell -shell'
+# K8S
+alias k='kubectl'
+alias kv='kubectl version --client --output=yaml'
+alias mku='minikube'
+
+# Tools
+alias nosql='~/Applications/nosql/nosqlbooster4mongo-8.1.1.AppImage'
+alias cursor='~/Applications/cursor/cursor-0.15.5-build-231115a5mv63u9f.AppImage'
 
 # GIT ALIAS
-alias ga='git add .'
+alias ga='git add -u'
 alias gcm='git commit -m'
+alias gcmne='git commit --amend --no-edit'
 alias gi='git init -y'
 alias gs='git status'
-alias gpul='git pull origin'
+alias gpul='git pull --rebase origin'
 alias gpus='git push origin $(git_current_branch)'
+alias gdi='git diff'
 alias gcl='git clone'
 alias gst='git stash'
+alias gsts='git stash save -m'
+alias gstpu='git stash push -m'
+alias gstpo='git stash pop'
+alias gstl='git stash list'
+alias gcpx='git cherry-pick -x'
+alias glnm='git log --no-merges'
+alias glone='git log --oneline'
+alias grbh='git rebase -i HEAD~'
+alias grco='git rebase --continue'
+alias grab='git rebase --abort'
+alias rmenv='git filter-branch --force --index-filter "git rm -rf --cached --ignore-unmatch .env" HEAD && git push --force'
+
+# Tricks
+# https://topdev.vn/blog/10-van-de-ve-git-thuong-gap-va-giai-phap/
 
 # YARN, NPM
+alias yi='yarn install'
 alias ya='yarn add'
-alias yr='yarm remove'
+alias yr='yarn remove'
 alias ys='yarn start'
 alias yd='yarn dev'
+alias yt='yarn test'
+alias yb='yarn build'
 alias yaG='yarn global add'
+alias yrG='yarn global remove'
 alias yaD='yarn add -D'
+alias yy='yarn -y'
+alias ysd='yarn start:dev'
+
+alias pn='pnpm'
+alias pnr='pnpm run'
+alias pna='pnpm add'
+alias pnaD='pnpm add -D'
+alias pni='pnpm install'
+
+alias psync='npm run dbm:run'
+alias pgen='npm run dbm:generate'
+alias prevert='npm run dbm:revert'
+
+alias niG='sudo npm install -g'
+alias nuG='sudo npm uninstall -g'
 
 alias ngl='npm list -g --depth=0'
 alias ygl='yarn global list'
+
+# Tools
+alias inf='infisical'
+alias infr='infisical run --'
 
 # OPEN FILE
 alias -s md=code
@@ -57,26 +116,90 @@ alias -g G="| grep"
 alias -g L="| less"
 
 # OTHER
-alias nodejs='cd /var/www/html/nodejs'
+alias per='cd /home/vuhuynhminh/projects/personal'
+alias dev='cd /home/vuhuynhminh/projects/dev'
+alias pubip='curl -4 icanhazip.com'
+
 alias h='history'
 alias px='ps auxf | grep'
-
-alias nosql='/home/vhm/Downloads/tools/nosqlbooster4mongo-7.0.2.AppImage'
-
-# FUNC
-dcleanup(){
-    docker rm -v $(docker ps --filter status=exited -q 2>/dev/null) 2>/dev/null
-    docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2>/dev/null
-}
-
-#gf(){
-#    curr_branch=$(git symbolic-ref --short -q HEAD);
-#    git add *
-#    git commit -m $1;
-#    git push origin $curr_branch;
-#}
+alias mrs='run-rs --portStart 27000 -v 5.0 --mongod /usr/local/Cellar/mongodb-community@4.4/4.4.10/bin/mongod'
+alias dumpprod='mongodump --uri="mongodb://cbs_official:vsWkU7Ubuq9zQgziCqt4GmdN@10.90.10.71:27017,10.90.45.236:27017,10.90.11.14:27017/cbs_official?replicaSet=rs0&authSource=admin" -o ~/Downloads/db_cbs_prod'
 
 mkcd(){
     mkdir "$1"
     cd "$1"
+}
+
+mkf() {
+    for var in "$@"
+    do
+        mkdir -p $( dirname "$var") && touch "$var"
+    done
+}
+
+dcleanup() {
+    sudo docker rm -v $(sudo docker ps --filter status=exited -q 2>/dev/null) 2>/dev/null
+    sudo docker rmi $(sudo docker images --filter dangling=true -q 2>/dev/null) 2>/dev/null
+}
+
+dcsar() {
+  sudo docker stop $1 && sudo docker rm $1
+}
+
+dccfull() {
+  sudo docker stop $1 && sudo docker rm $1 && sudo docker rmi $1
+}
+
+dcup() {
+    sudo docker compose -f $1 up -d
+}
+
+dcdown() {
+    sudo docker compose -f $1 down -v
+}
+
+gacp() {
+    curr_branch=$(git symbolic-ref --short -q HEAD)
+    git add .
+    git commit -m $1
+    git pull origin $curr_branch
+    git push origin $curr_branch
+}
+
+fwatch() {
+  fswatch -o $1 | xargs -n1 -I{} . $2
+}
+
+k8() {
+  kubectl $1 -n demo-k8s $2
+}
+
+kug() {
+  k get $1 -n demo-k8s
+}
+
+kue() {
+  shell=$3 || shell=bash
+  k exec -it pod/$1 -n demo-k8s -c $2 -- $shell
+}
+
+gencer() {
+  openssl req -x509 -newkey rsa:4096 -keyout $1/key.pem -out $1/cert.pem -nodes -days 365
+}
+
+sitespeed() {
+  sudo docker run --rm -v "$(pwd):/sitespeed.io" sitespeedio/sitespeed.io:26.1.0 $1
+}
+
+pyvenv() {
+  python -m venv $1
+  source $1/bin/activate
+}
+
+psqlc() {
+  psql -h localhost -p $1 -d $2 -U $3 -W
+}
+
+killp() {
+  sudo kill -9 $(sudo lsof -t -i:$1)
 }
