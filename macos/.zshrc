@@ -130,9 +130,6 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
-# Flutter
-export PATH="$PATH:/Users/macintoshhd/development/flutter/bin"
-
 # Flux
 command -v flux >/dev/null && . <(flux completion zsh)
 
