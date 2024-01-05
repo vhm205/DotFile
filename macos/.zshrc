@@ -81,7 +81,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting poetry)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -109,7 +109,7 @@ source $ZSH/oh-my-zsh.sh
 #
 # Example aliases
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-source /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme
+# source /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme
 # alias ls='exa --icons --group-directories-first'
 # alias ll='exa -l --icons --no-user --group-directories-first  --time-style long-iso'
 # alias la='exa -la --icons --no-user --group-directories-first  --time-style long-iso'
@@ -171,4 +171,11 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
 [[ -s "/Users/macintoshhd/.gvm/scripts/gvm" ]] && source "/Users/macintoshhd/.gvm/scripts/gvm"
+
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+# pyenv end

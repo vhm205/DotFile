@@ -23,8 +23,8 @@ alias checkp='lsof -i'
 # PYTHON
 alias python='python3.11'
 alias pie='pipenv'
-alias pir='pipenv run python'
-alias insr='pip install -r requirements.txt'
+alias pier='pipenv run python'
+alias pir='pip install -r requirements.txt'
 
 # DOCKER ALIAS
 alias dc='docker'
