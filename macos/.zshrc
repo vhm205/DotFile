@@ -83,8 +83,6 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 
-source $ZSH/oh-my-zsh.sh
-
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -99,20 +97,12 @@ source $ZSH/oh-my-zsh.sh
 #   export EDITOR='mvim'
 # fi
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-# source /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme
-# alias ls='exa --icons --group-directories-first'
-# alias ll='exa -l --icons --no-user --group-directories-first  --time-style long-iso'
-# alias la='exa -la --icons --no-user --group-directories-first  --time-style long-iso'
+
+source $ZSH/oh-my-zsh.sh
 
 [ -f ~/aliasrc/.aliases ] && source ~/aliasrc/.aliases
 
@@ -141,9 +131,6 @@ command -v flux >/dev/null && . <(flux completion zsh)
 # bun
 export BUN_INSTALL="/Users/macintoshhd/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
-
-# Postgres
-# echo 'export PATH="/usr/local/opt/libpq/bin:$PATH"' >> ~/.zshrc
 
 # OPEN AI
 
@@ -179,3 +166,5 @@ export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 # pyenv end
+#
+eval "$(/opt/homebrew/bin/brew shellenv)"
