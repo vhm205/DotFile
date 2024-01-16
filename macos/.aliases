@@ -21,7 +21,8 @@ alias cl='clear'
 alias checkp='lsof -i'
 
 # PYTHON
-alias python='python3.11'
+alias python='python3.12'
+alias pip='pip3'
 alias pie='pipenv'
 alias pier='pipenv run python'
 alias pir='pip install -r requirements.txt'
