@@ -1,20 +1,20 @@
 # SYSTEM ALIAS
 alias sv='brew services'
 alias svl='brew services list'
-alias svsta='brew services start'
-alias svsto='brew services stop'
-alias svr='brew services restart'
 alias svs='brew search'
 alias svi='brew install'
 alias svic='brew install --cask'
 alias svu='brew uninstall'
 alias ping='/sbin/ping'
 alias nsl='nslookup'
+alias mp='multipass'
 
 alias zshrl='source ~/.zshrc'
 alias zshrc='vim ~/.zshrc'
 alias aliasrc='vim ~/aliasrc/.aliases'
 alias vimrc='vim ~/.vimrc'
+alias redisconf='vim /usr/local/etc/redis.conf'
+
 alias rmf='rm -rf'
 alias ex='exit'
 alias cl='clear'
