@@ -8,6 +8,8 @@ alias svu='brew uninstall'
 alias ping='/sbin/ping'
 alias nsl='nslookup'
 alias mp='multipass'
+alias iplist='ipconfig getiflist'
+alias getip='ipconfig getifaddr'
 
 alias zshrl='source ~/.zshrc'
 alias zshrc='vim ~/.zshrc'
