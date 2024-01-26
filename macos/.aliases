@@ -26,7 +26,8 @@ alias checkp='lsof -i'
 alias python='python3.12'
 alias pip='pip3'
 alias pie='pipenv'
-alias pier='pipenv run python'
+alias piepy='pipenv run python'
+alias piepi='pipenv run pip'
 alias pir='pip install -r requirements.txt'
 
 # DOCKER ALIAS
