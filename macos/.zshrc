@@ -104,7 +104,7 @@ plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
-[ -f ~/aliasrc/.aliases ] && source ~/aliasrc/.aliases
+[[ -f ~/aliasrc/.aliases ]] && source ~/aliasrc/.aliases
 
 # FZF, ripgrep for searching
 if type rg &> /dev/null; then
@@ -156,6 +156,7 @@ case ":$PATH:" in
 esac
 # pnpm end
 
+# go version manager
 [[ -s "/Users/macintoshhd/.gvm/scripts/gvm" ]] && source "/Users/macintoshhd/.gvm/scripts/gvm"
 
 # pyenv
