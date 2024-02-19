@@ -137,16 +137,10 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # Python environment
 export PATH="$HOME/.pyenv/bin:$PATH"
 
-# NVM
+# nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/macintoshhd/development/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/macintoshhd/development/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/macintoshhd/development/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/macintoshhd/development/google-cloud-sdk/completion.zsh.inc'; fi
 
 # pnpm
 export PNPM_HOME="/Users/macintoshhd/Library/pnpm"
@@ -154,7 +148,6 @@ case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
-# pnpm end
 
 # go version manager
 [[ -s "/Users/macintoshhd/.gvm/scripts/gvm" ]] && source "/Users/macintoshhd/.gvm/scripts/gvm"
@@ -163,7 +156,12 @@ esac
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
-# pyenv end
 
 # Fig post block. Keep at the bottom of this file.
 [[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '~/Applications/google-cloud-sdk/path.zsh.inc' ]; then . '~/Applications/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '~/Applications/google-cloud-sdk/completion.zsh.inc' ]; then . '~/Applications/google-cloud-sdk/completion.zsh.inc'; fi
