@@ -161,7 +161,7 @@ eval "$(pyenv init -)"
 [[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '~/Applications/google-cloud-sdk/path.zsh.inc' ]; then . '~/Applications/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '/Users/macintoshhd/Applications/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/macintoshhd/Applications/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '~/Applications/google-cloud-sdk/completion.zsh.inc' ]; then . '~/Applications/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '/Users/macintoshhd/Applications/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/macintoshhd/Applications/google-cloud-sdk/completion.zsh.inc'; fi
