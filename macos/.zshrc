@@ -123,7 +123,11 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 # Flux
 command -v flux >/dev/null && . <(flux completion zsh)
 
+# FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Use ~~ as the trigger sequence instead of the default **
+export FZF_COMPLETION_TRIGGER='**'
 
 # bun completions
 [ -s "/Users/macintoshhd/.bun/_bun" ] && source "/Users/macintoshhd/.bun/_bun"

@@ -127,6 +127,9 @@ alias pnrG='pnpm remove -g'
 alias inf='infisical'
 alias infr='infisical run --'
 
+# FZF
+alias fv='fzf --print0 | xargs -0 -o vim'
+
 # OPEN FILE
 alias -s md=code
 alias -s js=code
