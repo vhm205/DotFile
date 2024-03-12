@@ -56,6 +56,7 @@ alias btc='better-commits'
 # GIT ALIAS
 alias ga='git add -u'
 alias gcm='git commit -m'
+alias gcam='git commit -am'
 alias gcmne='git commit --amend --no-edit'
 alias gi='git init'
 alias gs='git status'
