@@ -1,0 +1,13 @@
+return {}
+-- return {
+--   {
+--     "akinsho/git-conflict.nvim",
+--     version = "v2.0.0",
+--     config = true,
+--     init = function()
+--       require("git-conflict").setup({
+--         default_mappings = false,
+--       })
+--     end,
+--   },
+-- }
